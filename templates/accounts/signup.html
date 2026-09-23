@@ -1,0 +1,204 @@
+{% extends "index.html" %}
+{% block base %}
+<!-- Main Registration Canvas - Simple & Attractive -->
+<main class="flex-grow flex items-center justify-center py-8 px-4 bg-surface mt-6 sm:mt-8">
+<div class="w-full max-w-[95%] xs:max-w-[90%] sm:max-w-[85%] md:max-w-[1100px] lg:max-w-[1200px]">
+    <!-- Two-column layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- LEFT COLUMN: Seller Benefits - Clean Design -->
+        <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 hidden lg:block sticky top-24 border border-outline-variant shadow-sm">
+            <div class="text-center lg:text-left">
+                <!-- Icon -->
+                <div class="inline-flex lg:inline-flex items-center justify-center w-14 h-14 bg-primary/10 rounded-2xl mb-5">
+                    <span class="material-symbols-outlined text-3xl text-primary">storefront</span>
+                </div>
+                
+                <h2 class="text-2xl font-bold text-on-surface mb-2">Seller Benefits</h2>
+                <p class="text-on-surface-variant text-sm mb-8">Everything you need to succeed</p>
+                
+                <!-- Benefits List - Clean -->
+                <div class="space-y-5">
+                    <div class="flex gap-3">
+                        <span class="material-symbols-outlined text-primary text-xl">inventory_2</span>
+                        <div>
+                            <h3 class="font-semibold text-on-surface text-sm">Unlimited Products</h3>
+                            <p class="text-xs text-on-surface-variant mt-0.5">List unlimited items with no extra fees</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <span class="material-symbols-outlined text-primary text-xl">payments</span>
+                        <div>
+                            <h3 class="font-semibold text-on-surface text-sm">Fast Payouts</h3>
+                            <p class="text-xs text-on-surface-variant mt-0.5">Get paid weekly directly to your bank</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <span class="material-symbols-outlined text-primary text-xl">insights</span>
+                        <div>
+                            <h3 class="font-semibold text-on-surface text-sm">Analytics Dashboard</h3>
+                            <p class="text-xs text-on-surface-variant mt-0.5">Track sales and customer behavior</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <span class="material-symbols-outlined text-primary text-xl">support_agent</span>
+                        <div>
+                            <h3 class="font-semibold text-on-surface text-sm">Priority Support</h3>
+                            <p class="text-xs text-on-surface-variant mt-0.5">24/7 dedicated seller assistance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="mt-8 pt-6 border-t border-outline-variant">
+                    <div class="bg-surface-container rounded-xl p-3 text-center">
+                        <p class="text-xs text-on-surface-variant">
+                            Trusted by <span class="font-bold text-primary text-base">10,000+</span> sellers
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Registration Form - Clean Design -->
+        <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-outline-variant shadow-sm">
+            
+            <!-- Header -->
+            <div class="text-center mb-7">
+                <div class="inline-flex items-center justify-center w-14 h-14 bg-primary/10 rounded-2xl mb-4">
+                    <span class="material-symbols-outlined text-2xl text-primary">person_add</span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-bold text-on-surface mb-1">Create Account</h1>
+                <p class="text-sm text-on-surface-variant">Join as a seller on ShopSphere</p>
+            </div>
+
+            <!-- Form -->
+            <form class="space-y-4" enctype="multipart/form-data" method='post'>
+                {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div id="error-message" class="bg-red-50 border border-red-200 text-red-600 text-sm p-3 rounded-lg mb-4">
+                            <span class="material-symbols-outlined text-sm align-middle mr-1">error</span> {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <script>
+                    setTimeout(function() {
+                        var errorMessage = document.getElementById('error-message');
+                        if (errorMessage) errorMessage.style.display = 'none';
+                    }, 5000);
+                </script>
+                {% endif %}
+
+                {% csrf_token %}
+                        
+                <!-- Full Name -->
+                <div>
+                    <label class="text-sm font-medium text-on-surface-variant block mb-1.5" for="full_name">Full Name *</label>
+                    <input name="full_name" class="w-full h-11 px-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition text-sm" 
+                           id="full_name" 
+                           placeholder="Enter your full name" 
+                           type="text" 
+                           required/>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="text-sm font-medium text-on-surface-variant block mb-1.5" for="email">Email Address *</label>
+                    <input name="email" class="w-full h-11 px-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition text-sm" 
+                           id="email" 
+                           placeholder="name@example.com" 
+                           type="email" 
+                           required/>
+                </div>
+
+                <!-- Shop Details -->
+                <div>
+                    <label class="text-sm font-medium text-on-surface-variant block mb-1.5" for="shop_details">Shop Details *</label>
+                    <textarea name="shop_details" class="w-full min-h-[90px] px-3 py-2 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition text-sm resize-none" 
+                              id="shop_details" 
+                              placeholder="Describe your shop, products, or services..." 
+                              required></textarea>
+                    <p class="text-xs text-outline-variant mt-1">Tell customers about your store</p>
+                </div>
+
+                <!-- Password Row -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-sm font-medium text-on-surface-variant block mb-1.5" for="password">Password *</label>
+                        <input name='pass1' class="w-full h-11 px-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition text-sm" 
+                               id="password" 
+                               placeholder="••••••••" 
+                               type="password" 
+                               required/>
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium text-on-surface-variant block mb-1.5" for="confirm_password">Confirm Password *</label>
+                        <input name='pass2' class="w-full h-11 px-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition text-sm" 
+                               id="confirm_password" 
+                               placeholder="••••••••" 
+                               type="password" 
+                               required/>
+                    </div>
+                </div>
+
+                <!-- Profile Image -->
+                <div>
+                    <label class="text-sm font-medium text-on-surface-variant block mb-1.5" for="image">Profile Image</label>
+                    <input name='image' class="w-full h-11 px-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition text-sm file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer" 
+                           id="image" 
+                           type="file"/>
+                </div>
+
+                <!-- Terms -->
+                <div class="flex items-start gap-2 pt-1">
+                    <input class="mt-0.5 w-4 h-4 text-primary border-outline-variant rounded focus:ring-primary" 
+                           id="terms" 
+                           type="checkbox" 
+                           required/>
+                    <label class="text-xs text-on-surface-variant" for="terms">
+                        I agree to the <a class="text-primary hover:underline" href="#">Terms</a> and <a class="text-primary hover:underline" href="#">Privacy Policy</a> *
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button class="w-full h-11 bg-primary text-white font-medium text-sm rounded-lg hover:bg-primary-dark active:scale-[0.98] transition-all flex justify-center items-center gap-2 mt-5" 
+                        type="submit">
+                    <span class="material-symbols-outlined text-base">person_add</span>
+                    Create Account
+                </button>
+            </form>
+
+            <!-- Login Link -->
+            <div class="mt-6 pt-5 border-t border-outline-variant text-center">
+                <p class="text-sm text-on-surface-variant">
+                    Already have an account? 
+                    <a class="text-primary font-semibold hover:underline" href="{% url 'accounts:login' %}">Sign In</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trust Badge - Simple -->
+    <div class="mt-8 flex flex-wrap justify-center items-center gap-4 opacity-60">
+        <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">lock</span>
+            <span class="text-xs">Secure</span>
+        </div>
+        <div class="w-px h-3 bg-outline-variant"></div>
+        <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">verified</span>
+            <span class="text-xs">Privacy</span>
+        </div>
+        <div class="w-px h-3 bg-outline-variant hidden xs:block"></div>
+        <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">support_agent</span>
+            <span class="text-xs">24/7 Support</span>
+        </div>
+    </div>
+</div>
+</main>
+{% endblock base %}

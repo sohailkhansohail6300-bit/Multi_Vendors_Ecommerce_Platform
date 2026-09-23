@@ -1,0 +1,247 @@
+{% extends 'userProfile/seller_header_footer.html' %}
+
+{% block seller %}
+
+<div class=" mt-24 lg:ml-sidebar-width min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/30">
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-slate-800">
+                Update Product
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+                Edit your product information
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+
+            <form method="POST" enctype="multipart/form-data" class="space-y-6">
+
+                {% csrf_token %}
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="mb-3 p-4 rounded-xl shadow-lg font-medium
+                            {% if message.tags == 'success' %}
+                                bg-green-500 text-white
+                            {% elif message.tags == 'error' %}
+                                bg-red-500 text-white
+                            {% else %}
+                                bg-blue-500 text-white
+                            {% endif %}
+                        ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <!-- Product Image -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                        Product Image
+                    </label>
+                    
+                    {% if product.image %}
+                        <div class="mb-3 p-3 bg-slate-50 rounded-lg border border-slate-200">
+                            <p class="text-sm text-slate-600 mb-2">Current Image:</p>
+                            <img src="{{ product.image.url }}" 
+                                 alt="{{ product.Name }}" 
+                                 class="h-32 w-32 object-cover rounded-lg border border-slate-200">
+                        </div>
+                    {% endif %}
+                    
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        class="w-full border border-slate-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                    <p class="text-xs text-slate-500 mt-1">Leave empty to keep current image</p>
+                </div>
+
+                <!-- Product Name -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                        Product Name <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ product.Name }}"
+                        required
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Enter product name"
+                    >
+                </div>
+
+                <!-- Category -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                        Category <span class="text-red-500">*</span>
+                    </label>
+                    <select
+                        name="category"
+                        required
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                        <option value="">Select Category</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" 
+                                {% if product.category_relation.id == category.id %}selected{% endif %}>
+                                {{ category.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Price + Quantity -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">
+                            Price <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="price"
+                            value="{{ product.Price }}"
+                            required
+                            class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="0.00"
+                        >
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">
+                            Stock Quantity <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="number"
+                            name="qty"
+                            value="{{ quantity.qty }}"
+                            required
+                            class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Available stock"
+                        >
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                        Product Description <span class="text-red-500">*</span>
+                    </label>
+                    <textarea
+                        name="description"
+                        rows="6"
+                        required
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Write product description..."
+                    >{{ product.Description }}</textarea>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t">
+                    <a href="{% url 'userProfile:update_product' id=product.id %}"
+                       class="px-6 py-3 border border-slate-300 rounded-lg text-center text-slate-700 hover:bg-slate-50 transition-colors">
+                        Cancel
+                    </a>
+                    <button
+                        type="submit"
+                        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    >
+                        Update Product
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Optional: Add image preview JavaScript -->
+<script>
+    // Image preview functionality
+    const imageInput = document.querySelector('input[name="image"]');
+    if (imageInput) {
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                const currentImageDiv = document.querySelector('.mb-3.p-3.bg-slate-50');
+                
+                reader.onload = function(e) {
+                    if (currentImageDiv) {
+                        // Replace current image with preview
+                        const img = currentImageDiv.querySelector('img');
+                        if (img) {
+                            img.src = e.target.result;
+                        }
+                    } else {
+                        // Create new preview if no current image exists
+                        const previewDiv = document.createElement('div');
+                        previewDiv.className = 'mb-3 p-3 bg-slate-50 rounded-lg border border-slate-200';
+                        previewDiv.innerHTML = `
+                            <p class="text-sm text-slate-600 mb-2">Image Preview:</p>
+                            <img src="${e.target.result}" class="h-32 w-32 object-cover rounded-lg border border-slate-200">
+                        `;
+                        imageInput.parentNode.insertBefore(previewDiv, imageInput);
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Form validation
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+            
+            const price = document.querySelector('input[name="price"]');
+            if (price && (isNaN(parseFloat(price.value)) || parseFloat(price.value) <= 0)) {
+                price.classList.add('border-red-500');
+                alert('Please enter a valid price greater than 0.');
+                isValid = false;
+            }
+            
+            const qty = document.querySelector('input[name="qty"]');
+            if (qty && (!Number.isInteger(parseInt(qty.value)) || parseInt(qty.value) < 0)) {
+                qty.classList.add('border-red-500');
+                alert('Please enter a valid quantity (non-negative integer).');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+        
+        // Remove red border on input
+        const inputs = form.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('border-red-500');
+            });
+        });
+    }
+</script>
+
+{% endblock seller %}

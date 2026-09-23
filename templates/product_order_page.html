@@ -1,0 +1,288 @@
+{% extends "index.html" %}
+{% block base %}
+
+<main class="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-10 lg:py-12">
+  
+  <!-- Top Section: Product Hero & Checkout - Responsive Grid -->
+  <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 mb-10 md:mb-12 lg:mb-16 items-start">
+
+
+{% if messages %}
+    {% for message in messages %}
+<div  id="msg" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-black/30 via-black/20 to-transparent backdrop-blur-sm animate-[fadeIn_0.3s_ease-out]">
+  <div class="bg-white rounded-3xl shadow-2xl max-w-md mx-4 overflow-hidden transform animate-[slideUp_0.4s_ease-out]">
+    
+    <!-- Colorful Top Bar -->
+    <div class="h-2 bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500"></div>
+    
+    <div class="p-8 text-center">
+      <!-- Checkmark Icon -->
+      <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      
+      <!-- Message -->
+      <p class="text-gray-800 text-lg font-semibold">
+        {{ message }}
+      </p>
+      
+      <!-- Close Hint -->
+      <p class="text-xs text-gray-400 mt-4">✨ Thanks for selecting this product!</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; backdrop-filter: blur(0px); }
+    to { opacity: 1; backdrop-filter: blur(4px); }
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+{% endfor %}
+
+    <script>
+      setTimeout(function () {
+        const msg = document.getElementById("msg");
+        if (msg) {
+          msg.style.display = "none";
+        }
+      }, 2000);
+    </script>
+{% endif %}
+
+
+    <!-- Product Image -->
+<div class="rounded-xl overflow-hidden checkout-shadow bg-white aspect-square flex items-center justify-center border border-outline-variant/50">
+  <img 
+    src="{{ product.image.url }}" 
+    alt="{{ product.title }}" 
+    class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+  />
+</div>
+
+    
+<!-- Checkout Form -->
+{% load mathfilters %}
+
+<div class="bg-surface-container-lowest p-5 sm:p-6 md:p-7 lg:p-8 rounded-xl border border-outline-variant checkout-shadow">
+  <div class="mb-5 md:mb-6">
+    <h1 class="font-h1 text-h1 mb-2 text-on-surface">{{ product.Name }}</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant">{{ product.Description|truncatewords:5}}</p>
+    <div class="mt-3 flex items-center gap-2 flex-wrap">
+      <span class="text-2xl md:text-3xl font-bold text-primary">${{ product.Price|floatformat:2 }}</span>
+      <span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-2 py-0.5 rounded-full text-xs font-semibold">Save 25%</span>
+    </div>
+  </div>
+  
+  <form id='order' class="space-y-4 md:space-y-5" method='post' action="{% url 'order' %}">
+  
+    <p id='msg2' class="text-green-500 font-medium">{{ error }}</p>
+    
+    {% csrf_token %}
+    <input type="hidden" name="product_id" value="{{ product.id }}">
+    {% with quantity=product.quantity_set.last.qty %}
+    <div class="flex flex-col md:flex-row gap-4">
+      <!-- Product Name -->
+      <div class="flex-1">
+        <label class="block font-label-md text-label-md mb-1.5 text-on-surface">Product Name</label>
+        <input value="{{ product.Name }}" name="product_name" readonly class="w-full cursor-not-allowed px-3 md:px-4 py-2 md:py-2.5 rounded-lg border border-outline-variant bg-gray-50 outline-none text-body-md" type="text"/>
+      </div>
+
+      <!-- Quantity -->
+      <div class="w-full md:w-32">
+        <label class="block font-label-md text-label-md mb-1.5 text-on-surface">Quantity</label>
+        <input value="{{ quantity }}" name="quantity" readonly class="w-full cursor-not-allowed px-3 md:px-4 py-2 md:py-2.5 rounded-lg border border-outline-variant bg-gray-50 outline-none text-body-md text-center" type="text"/>
+      </div>
+    </div>
+
+     <!-- Product Name -->
+      <div class="flex-1">
+        <label class="block font-label-md text-label-md mb-1.5 text-on-surface">Total Amount</label>
+        <input value="{{ product.Price|mul:quantity|floatformat:2 }}" name="total_price" readonly class="w-full cursor-not-allowed px-3 md:px-4 py-2 md:py-2.5 rounded-lg border border-outline-variant bg-gray-50 outline-none text-body-md" type="text"/>
+      </div>
+
+     
+
+   
+    {% endwith %}
+
+    <div class="grid grid-cols-1 xs:grid-cols-2 gap-3 md:gap-4">
+      <div>
+        <label class="block font-label-md text-label-md mb-1.5 text-on-surface">Sipping Address, State</label>
+        <input name="shipping_address" class="w-full px-3 md:px-4 py-2 md:py-2.5 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none text-body-md" placeholder="Pakistan, D I Khan" type="text"/>
+      </div>
+      <div>
+        <label class="block font-label-md text-label-md mb-1.5 text-on-surface">Street</label>
+        <input name="street" class="w-full px-3 md:px-4 py-2 md:py-2.5 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none text-body-md" placeholder="123 Main St" type="text"/>
+      </div>
+    </div>
+    <div>
+      <label class="block font-label-md text-label-md mb-1.5 text-on-surface">Phone Number</label>
+      <input name="phone" class="w-full px-3 md:px-4 py-2 md:py-2.5 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none text-body-md" placeholder="+1 (555) 000-0000" type="tel"/>
+    </div>
+    <div class="pt-3 md:pt-4">
+      <button class="w-full py-3 md:py-3.5 px-4 bg-primary text-white font-label-md text-label-md rounded-lg shadow-md hover:brightness-110 active:scale-[0.98] transition-all duration-200 uppercase tracking-wider" type="submit">
+        Complete Order
+      </button>
+    </div>
+  </form>
+</div>
+  </section>
+
+<script>
+ document.getElementById('order').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const form = this; // Reference to the form
+  const data = new FormData(form);
+  const msgElement = document.getElementById('msg2');
+
+  fetch('{% url "order" %}', {
+    method: 'POST',
+    body: data,
+    headers: {
+      'X-CSRFToken': data.get('csrfmiddlewaretoken')
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    msgElement.innerText = data.error;
+    if (data.error.includes('successfully')) {
+        msgElement.classList.remove('text-red-500');
+        msgElement.classList.add('text-green-500');
+        form.reset(); 
+    } else {
+        msgElement.classList.remove('text-green-500');
+        msgElement.classList.add('text-red-500');
+    }
+    form.reset();
+    setTimeout(function () {
+        msgElement.innerText = '';
+    }, 2000);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    msgElement.innerText = 'Something went wrong.';
+  });
+});
+</script>
+
+  <!-- Middle Section: Customer Reviews -->
+  <section class="mb-10 md:mb-12 lg:mb-16">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-6 md:mb-8">
+      <div>
+        <h2 class="font-h2 text-h2 text-on-surface">Customer Reviews</h2>
+        <div class="flex flex-wrap items-center gap-2 mt-2">
+          <div class="flex text-primary gap-0.5">
+            <span class="material-symbols-outlined text-[18px] sm:text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[18px] sm:text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[18px] sm:text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[18px] sm:text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[18px] sm:text-[20px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+          </div>
+          <span class="font-label-md text-label-md text-on-surface-variant">4.8 out of 5 based on 1,240 reviews</span>
+        </div>
+      </div>
+      <button class="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-white border border-outline-variant text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-all active:scale-95">
+        <span class="material-symbols-outlined text-[18px] sm:text-[20px]">edit</span>
+        Write a Review
+      </button>
+    </div>
+    
+    <!-- Write Review Form - Hidden by default, responsive toggle -->
+    <div class="mb-8 md:mb-10 p-1 sm:p-5 md:p-6 bg-surface-container-lowest border border-outline-variant rounded-xl" id="review-form-container">
+      <form id='form' class="flex flex-col gap-4" method='post'>
+        {% csrf_token %}
+       
+        <p id='msg1' class="text-green-500 font-medium">{{ error }}</p>
+       
+        <div>
+          <label class="block font-label-md text-label-md mb-1.5 text-on-surface" for="user-review">Your Review</label>
+          <textarea name='review' class="w-full px-3 md:px-4 py-2 md:py-2.5 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none font-body-md" id="user-review" placeholder="Share your thoughts about the Studio Pro Wireless..." rows="3"></textarea>
+        </div>
+        <div class="flex justify-end">
+          <button type="submit" class="px-5 py-2 bg-primary text-white font-label-md text-label-md rounded-lg shadow-md hover:brightness-110 active:scale-[0.98] transition-all duration-200">
+            Submit Review
+          </button>
+        </div>
+      </form>
+    </div>
+    
+<script>
+document.getElementById('form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const data = new FormData(this);
+  fetch('',{
+    method: 'POST',
+    body: data,
+    headers: {
+      'X-CSRFToken': data.get('csrfmiddlewaretoken')
+    }
+  })
+  .then(response => response.json())
+  .then(data => {document.getElementById('msg1').innerText =data.error;
+  setTimeout(function () {
+        document.getElementById('msg1').innerText = '';
+      }, 2000);
+ })
+  this.reset();
+});
+</script>
+    <!-- Review Cards Grid - Responsive -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
+      <!-- Review Card 1 -->
+       {% if comments %}
+       {% for comment in comments %}
+       
+       
+      <div class="bg-surface-container-lowest p-4 sm:p-5 rounded-xl border border-outline-variant hover:shadow-md transition-shadow">
+        <div class="flex flex-wrap justify-between items-center gap-2 mb-3">
+          
+          <span class="font-label-md text-label-md text-on-surface font-semibold">{{ comment.user_relation.username|default:"Guest" }}</span>
+          <div class="flex text-primary gap-0.5">
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+          </div>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{{ comment.review_text }}</p>
+      </div>
+   
+      {% endfor %}
+      {% else  %}
+      <p class="font-body-md text-body-md text-on-surface-variant">No reviews yet.</p>
+      {% endif %}
+    </div>
+  </section>
+  
+  <!-- Bottom Section: Product Details - Responsive Grid -->
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-12 pt-8 md:pt-10 border-t border-outline-variant">
+    <div class="lg:col-span-7">
+      <h2 class="font-h2 text-h2 text-on-surface mb-3 md:mb-4">{{ product.Name }}</h2>
+      <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-4 md:mb-5">
+        {{ product.Description }}
+      </p>
+      
+    </div>
+    <div class="lg:col-span-5 hidden bg-surface-container rounded-xl p-5 sm:p-6 md:p-7">
+      <h3 class="font-h3 text-h3 text-on-surface mb-4 md:mb-5 border-b border-outline-variant pb-3">Technical Specifications</h3>
+      <dl class="space-y-3 md:space-y-4">
+        <div class="flex flex-wrap justify-between items-center gap-2"><dt class="font-label-md text-label-md text-on-surface-variant">Driver Size</dt><dd class="font-label-md text-label-md text-on-surface font-medium">40mm Custom Titanium</dd></div>
+        <div class="flex flex-wrap justify-between items-center gap-2"><dt class="font-label-md text-label-md text-on-surface-variant">Frequency Response</dt><dd class="font-label-md text-label-md text-on-surface font-medium">10Hz - 40,000Hz</dd></div>
+        <div class="flex flex-wrap justify-between items-center gap-2"><dt class="font-label-md text-label-md text-on-surface-variant">Battery Life</dt><dd class="font-label-md text-label-md text-on-surface font-medium">Up to 45 Hours (ANC On)</dd></div>
+        <div class="flex flex-wrap justify-between items-center gap-2"><dt class="font-label-md text-label-md text-on-surface-variant">Connectivity</dt><dd class="font-label-md text-label-md text-on-surface font-medium">Bluetooth 5.3, USB-C, 3.5mm</dd></div>
+        <div class="flex flex-wrap justify-between items-center gap-2"><dt class="font-label-md text-label-md text-on-surface-variant">Weight</dt><dd class="font-label-md text-label-md text-on-surface font-medium">254g</dd></div>
+        <div class="flex flex-wrap justify-between items-center gap-2"><dt class="font-label-md text-label-md text-on-surface-variant">Impedance</dt><dd class="font-label-md text-label-md text-on-surface font-medium">32 Ohms</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+{% endblock base %}

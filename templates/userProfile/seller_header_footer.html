@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Executive Summary · Apex Mercantile</title>
+  <!-- Tailwind + Plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+    button, a, [role="button"] {
+      -webkit-tap-highlight-color: transparent;
+    }
+    @media (max-width: 1024px) {
+      .glass-card {
+        backdrop-filter: blur(8px);
+      }
+    }
+    body {
+      overflow-x: hidden;
+    }
+    .sidebar-transition {
+      transition: transform 0.25s ease-in-out;
+    }
+    /* Footer responsive styles */
+    footer {
+      transition: margin-left 0.3s ease;
+    }
+    @media (max-width: 1023px) {
+      footer {
+        margin-left: 0 !important;
+        width: 100% !important;
+      }
+    }
+  </style>
+
+
+<style>
+    .news-ticker {
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        width: 100%;
+    }
+    
+    .news-ticker-content {
+        display: inline-block;
+        animation: scrollNews 20s linear infinite;
+    }
+    
+    .news-ticker-wrapper:hover .news-ticker-content {
+        animation-play-state: paused;
+    }
+    
+    @keyframes scrollNews {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+    
+    .news-ticker-text {
+        display: inline-block;
+        font-size: 0.875rem;
+        color: #475569;
+    }
+    
+    @media (max-width: 640px) {
+        .news-ticker-text {
+            font-size: 0.75rem;
+        }
+    }
+</style>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary-fixed": "#dde1ff",
+            "error-container": "#ffdad6",
+            "on-primary-fixed-variant": "#0038b6",
+            "surface": "#fbf8ff",
+            "on-secondary-fixed-variant": "#3f465c",
+            "surface-container": "#ededfb",
+            "on-error-container": "#93000a",
+            "outline-variant": "#c3c5d9",
+            "on-primary-fixed": "#001452",
+            "background": "#fbf8ff",
+            "tertiary": "#952200",
+            "surface-container-high": "#e7e7f5",
+            "surface-bright": "#fbf8ff",
+            "outline": "#737688",
+            "on-secondary": "#ffffff",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#ffb4a1",
+            "secondary-fixed": "#dae2fd",
+            "tertiary-container": "#bf3003",
+            "secondary-fixed-dim": "#bec6e0",
+            "surface-container-low": "#f3f2ff",
+            "on-tertiary-fixed-variant": "#891e00",
+            "on-surface-variant": "#434656",
+            "on-surface": "#191b25",
+            "tertiary-fixed": "#ffdbd2",
+            "on-background": "#191b25",
+            "surface-container-highest": "#e1e1ef",
+            "primary-fixed-dim": "#b7c4ff",
+            "on-primary": "#ffffff",
+            "surface-variant": "#e1e1ef",
+            "primary": "#003ec7",
+            "on-tertiary-fixed": "#3c0800",
+            "secondary": "#0F172A",
+            "on-secondary-fixed": "#131b2e",
+            "inverse-on-surface": "#f0effe",
+            "surface-tint": "#004ced",
+            "inverse-surface": "#2e303a",
+            "on-secondary-container": "#5c647a",
+            "on-primary-container": "#dfe3ff",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "12px",
+            xl: "16px",
+            full: "9999px"
+          },
+          spacing: {
+            sm: "12px",
+            md: "16px",
+            base: "4px",
+            "2xl": "48px",
+            "sidebar-width": "280px",
+            xl: "32px",
+            lg: "24px",
+            "max-width": "1440px",
+            xs: "8px"
+          },
+          fontFamily: {
+            "body-md": ["Inter", "system-ui", "sans-serif"],
+            "label-sm": ["Geist", "system-ui", "sans-serif"],
+            "headline-lg": ["Inter", "system-ui", "sans-serif"],
+            "headline-display": ["Inter", "system-ui", "sans-serif"],
+            "label-md": ["Geist", "system-ui", "sans-serif"],
+            "headline-md": ["Inter", "system-ui", "sans-serif"],
+            "body-sm": ["Inter", "system-ui", "sans-serif"],
+            "body-lg": ["Inter", "system-ui", "sans-serif"]
+          },
+          fontSize: {
+            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.03em", fontWeight: "600" }],
+            "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "headline-display": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500" }],
+            "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+            "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased relative">
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileOverlay" class="fixed inset-0 bg-black/50 z-40 hidden transition-all duration-300 lg:hidden" style="backdrop-filter: blur(2px);"></div>
+
+  <!-- Top Header with Logo and Menu Toggle -->
+<header class="fixed top-0 right-0 left-0 lg:left-[280px] h-16 bg-surface/80 backdrop-blur-md flex items-center justify-between px-4 sm:px-6 border-b border-outline-variant/30 z-40 transition-all duration-300">
+    
+    <!-- Left: Hamburger + Scrolling Welcome Message -->
+    <div class="flex items-center gap-3 flex-1 min-w-0">
+        <button id="menuToggleBtn" class="lg:hidden text-on-surface-variant hover:text-primary transition-all p-1 rounded-md shrink-0">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+        
+                  <!-- Scrolling News Ticker -->
+                <div class="flex-1 overflow-hidden">
+              <div class="news-ticker">
+                  <div class="news-ticker-content">
+
+                      <span class="news-ticker-text flex items-center gap-4 whitespace-nowrap">
+
+                          🔥 
+                          <strong class="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                              Welcome, {{ profile.user_profile_relation.username }}!
+                          </strong>
+
+                          <span class="text-slate-300">|</span>
+
+                          📦 <span class="font-semibold text-slate-800">{{ new_orders }}</span> new orders
+
+                          <span class="text-slate-300">|</span>
+
+                          ⚠️ Low stock:
+                          <span class="font-semibold text-amber-600">{{ low_stock }}</span> items
+
+                      </span>
+
+                  </div>
+              </div>
+          </div>
+    
+    <!-- Right: User Profile -->
+                  <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                      
+                      
+                      <div class="flex items-center gap-2 sm:gap-3 cursor-pointer group">
+                          <div class="text-right hidden sm:block">
+                              <p class="text-label-md font-bold text-on-surface">{{ profile.user_profile_relation.username }}</p>
+                              <p class="text-label-sm text-on-surface-variant">Seller Admin</p>
+                          </div>
+                          {% if profile.image %}
+                          <img class="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-primary object-cover" alt="{{ profile.user_profile_relation.username }}" src="{{ profile.image.url }}">
+                          {% else %}
+                          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-primary bg-primary/20 flex items-center justify-center">
+                              <span class="material-symbols-outlined text-primary">person</span>
+                          </div>
+                          {% endif %}
+                      </div>
+                  </div>
+              </header>
+
+<!-- SideNavBar - Responsive -->
+                <aside id="sideNav" class="fixed left-0 top-0 h-full w-sidebar-width bg-secondary text-on-secondary flex flex-col border-r border-outline-variant/20 shadow-xl z-50 transition-transform duration-300 ease-out -translate-x-full lg:translate-x-0 sidebar-transition">
+                  
+                  <div class="flex justify-between items-center px-6 pt-6 pb-2 lg:hidden border-b border-white/10">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-white text-2xl">shopping_bag</span>
+                      <h1 class="text-headline-md font-bold text-white">CommercePro</h1>
+                    </div>
+                    <button id="closeSidebarBtn" class="text-white/80 hover:text-white p-1 rounded-full">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
+                  </div>
+                  
+                  <div class="px-6 mb-8 mt-3 hidden lg:block">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="material-symbols-outlined text-primary text-3xl">shopping_bag</span>
+                      <h1 class="text-headline-md font-headline-md font-bold text-on-primary">CommercePro</h1>
+                    </div>
+                    <p class="text-body-sm font-body-sm opacity-70">Enterprise Tier</p>
+                  </div>
+                  
+                  <nav class="flex-1 flex flex-col gap-1 px-3 overflow-y-auto">
+                    <!-- Profile Link - Fixed with white text on hover -->
+                <a class="flex items-center gap-3 text-on-secondary-fixed-variant px-5 py-3 hover:bg-secondary-container/50 hover:text-white transition-colors rounded-lg" 
+                  href="{% url 'userProfile:user_profile' %}">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span class="text-label-md font-label-md">Profile</span>
+                </a>
+
+                <!-- Apply the same to all menu items -->
+                <a class="flex items-center gap-3 text-on-secondary-fixed-variant px-5 py-3 hover:bg-secondary-container/50 hover:text-white transition-colors rounded-lg" 
+                  href="{% url 'userProfile:add_product' %}">
+                    <span class="material-symbols-outlined">add_box</span>
+                    <span class="text-label-md font-label-md">Add Product</span>
+                </a>
+
+                <a class="flex items-center gap-3 text-on-secondary-fixed-variant px-5 py-3 hover:bg-secondary-container/50 hover:text-white transition-colors rounded-lg" 
+                  href="#">
+                    <span class="material-symbols-outlined">edit_note</span>
+                    <span class="text-label-md font-label-md">Edit Product</span>
+                </a>
+
+                <a class="flex items-center gap-3 text-on-secondary-fixed-variant px-5 py-3 hover:bg-secondary-container/50 hover:text-white transition-colors rounded-lg" 
+                  href="{% url 'userProfile:seller_inventory' %}">
+                    <span class="material-symbols-outlined">inventory</span>
+                    <span class="text-label-md font-label-md">Inventory All</span>
+                </a>
+
+                <a class="flex items-center gap-3 text-on-secondary-fixed-variant px-5 py-3 hover:bg-secondary-container/50 hover:text-white transition-colors rounded-lg" 
+                  href="{% url 'userProfile:order_list' %}">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span class="text-label-md font-label-md">All Orders</span>
+                </a>
+                  </nav>
+                  
+                  <div class="mt-auto px-6 pb-6">
+                    <a href="{% url 'userProfile:logout' %}"
+                      class="w-full flex items-center gap-3 text-on-secondary-fixed-variant px-5 py-3 hover:bg-error/20 hover:text-error transition-colors rounded-lg">
+                      <span class="material-symbols-outlined">logout</span>
+                      <span class="text-label-md font-label-md">Logout</span>
+                    </a>
+                  </div>
+                </aside>
+
+  <!-- Main Content Block -->
+
+  
+  <!-- Sidebar Toggle JavaScript -->
+  <script>
+    (function() {
+      const sideNav = document.getElementById('sideNav');
+      const overlay = document.getElementById('mobileOverlay');
+      const menuToggle = document.getElementById('menuToggleBtn');
+      const closeBtn = document.getElementById('closeSidebarBtn');
+
+      function openSidebar() {
+        if (sideNav) {
+          sideNav.classList.remove('-translate-x-full');
+          sideNav.classList.add('translate-x-0');
+        }
+        if (overlay) overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeSidebar() {
+        if (sideNav) {
+          sideNav.classList.remove('translate-x-0');
+          sideNav.classList.add('-translate-x-full');
+        }
+        if (overlay) overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+      
+      if (menuToggle) menuToggle.addEventListener('click', openSidebar);
+      if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+      if (overlay) overlay.addEventListener('click', closeSidebar);
+      
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        if (window.innerWidth >= 1024) {
+          if (sideNav) {
+            sideNav.classList.remove('-translate-x-full');
+            sideNav.classList.add('lg:translate-x-0');
+            sideNav.classList.remove('translate-x-0');
+          }
+          if (overlay) overlay.classList.add('hidden');
+          document.body.style.overflow = '';
+        } else {
+          if (sideNav && !sideNav.classList.contains('translate-x-0')) {
+            sideNav.classList.add('-translate-x-full');
+            sideNav.classList.remove('translate-x-0');
+          }
+        }
+      });
+      
+      // Initial state
+      if (window.innerWidth < 1024) {
+        if (sideNav) sideNav.classList.add('-translate-x-full');
+      } else {
+        if (sideNav) sideNav.classList.remove('-translate-x-full');
+      }
+    })();
+  </script>
+  {% block seller %}
+  
+  {% endblock seller %}
+  {% include 'footer.html' %}
+</body>
+</html>

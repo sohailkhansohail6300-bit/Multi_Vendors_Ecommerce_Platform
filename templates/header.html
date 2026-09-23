@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>ShopSphere | Elevated Essentials — Fully Responsive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#0058be",
+                "on-primary": "#ffffff",
+                "primary-container": "#2170e4",
+                "surface": "#f9f9ff",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-low": "#f2f3fd",
+                "surface-container": "#ecedf7",
+                "surface-container-high": "#e6e7f2",
+                "surface-container-highest": "#e1e2ec",
+                "on-surface": "#191b23",
+                "on-surface-variant": "#424754",
+                "outline": "#727785",
+                "outline-variant": "#c2c6d6",
+                "tertiary": "#924700",
+                "on-tertiary": "#ffffff",
+                "background": "#f9f9ff",
+                "on-background": "#191b23",
+                "error": "#ba1a1a",
+                "on-error": "#ffffff"
+              },
+              borderRadius: {
+                DEFAULT: "0.25rem",
+                lg: "0.5rem",
+                xl: "0.75rem",
+                "2xl": "1rem",
+                full: "9999px"
+              },
+              fontFamily: {
+                h1: ["Manrope", "system-ui", "sans-serif"],
+                h2: ["Manrope", "system-ui", "sans-serif"],
+                h3: ["Manrope", "system-ui", "sans-serif"],
+                "body-lg": ["Inter", "system-ui", "sans-serif"],
+                "body-md": ["Inter", "system-ui", "sans-serif"],
+                "body-sm": ["Inter", "system-ui", "sans-serif"],
+                "label-md": ["Inter", "system-ui", "sans-serif"],
+                "label-sm": ["Inter", "system-ui", "sans-serif"]
+              },
+              fontSize: {
+                h1: ["clamp(32px, 5vw, 40px)", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+                h2: ["clamp(24px, 4vw, 32px)", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "700" }],
+                h3: ["clamp(20px, 3.5vw, 24px)", { lineHeight: "1.3", fontWeight: "600" }],
+                "body-lg": ["clamp(16px, 2.5vw, 18px)", { lineHeight: "1.6", fontWeight: "400" }],
+                "body-md": ["clamp(14px, 2vw, 16px)", { lineHeight: "1.5", fontWeight: "400" }],
+                "body-sm": ["clamp(12px, 1.8vw, 14px)", { lineHeight: "1.5", fontWeight: "400" }],
+                "label-md": ["clamp(12px, 2vw, 14px)", { lineHeight: "1", letterSpacing: "0.01em", fontWeight: "600" }],
+                "label-sm": ["11px", { lineHeight: "1", letterSpacing: "0.02em", fontWeight: "500" }]
+              },
+              spacing: {
+                xs: "4px",
+                sm: "8px",
+                md: "16px",
+                lg: "24px",
+                xl: "32px",
+                xxl: "48px"
+              },
+              maxWidth: {
+                "7xl": "1280px"
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .product-card:hover .quick-add {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* touch-friendly targets */
+        button, [role="button"], a:not(.no-touch-optimization) {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* mobile drawer overlay */
+        .mobile-nav-drawer {
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.2s ease;
+        }
+        .backdrop-blur-xs {
+            backdrop-filter: blur(4px);
+        }
+        
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased">
+
+<!-- Header with Toggle Mobile Menu - Fully Responsive -->
+<header class="fixed top-0 w-full z-50 border-b bg-white/95 backdrop-blur-md border-slate-200 shadow-sm font-manrope">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16">
+        <!-- Logo -->
+        <div class="text-xl sm:text-2xl font-extrabold tracking-tight text-blue-600">ShopSphere</div>
+
+        <!-- Desktop Navigation (visible md+) -->
+        <nav class="hidden md:flex items-center space-x-6 lg:space-x-8">
+            <a class="text-slate-600 font-semibold border-b-2 border-blue-600 pb-1 hover:text-blue-500 transition-colors duration-200" href="{% url 'home' %}">Shop</a>
+            <a class="text-slate-600 font-medium hover:text-blue-500 transition-colors duration-200" href="#">Categories</a>
+            <a class="text-slate-600 font-medium hover:text-blue-500 transition-colors duration-200" href="#">Deals</a>
+            <a class="text-slate-600 font-medium hover:text-blue-500 transition-colors duration-200" href="#">New Arrivals</a>
+        </nav>
+
+        <!-- Right side icons + Sign In -->
+        <div class="flex items-center justify-end">
+            <div class="flex items-center space-x-1">
+                <a href='{% url "accounts:account_cards" %}'>
+                    <button class="py-2 px-2 sm:px-3 md:px-4 text-slate-600 hover:scale-105 hover:text-blue-600 active:scale-95 transition-all duration-200">
+                        <span class="flex items-center gap-1 sm:gap-2">
+                            <span class="material-symbols-outlined text-base sm:text-lg md:text-xl">storefront</span>
+                            <span class="hidden sm:inline text-xs sm:text-sm md:text-base font-medium">Seller Account</span>
+                            <span class="sm:hidden text-xs font-medium">Seller</span>
+                        </span>
+                    </button>
+                </a>
+
+                <a href='{% url "accounts:login" %}' class="hidden sm:block">
+                    <button class="text-blue-600 hover:text-blue-700 font-semibold px-4 py-1.5 transition-all duration-200 hover:scale-105 active:scale-95 relative group">
+                        Sign In
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+                    </button>
+                </a>
+
+                <button id="mobileMenuToggle" class="md:hidden py-2 px-1 text-slate-600 hover:text-blue-600 active:scale-95 transition-all" aria-label="Menu">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer (full height, toggle) - nothing hidden, all menu items appear -->
+    <div id="mobileDrawer" class="fixed inset-0 z-40 bg-black/30 backdrop-blur-xs transition-all duration-300 opacity-0 pointer-events-none md:hidden">
+        <div class="absolute right-0 top-0 h-full w-4/5 max-w-sm bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-out mobile-nav-drawer flex flex-col">
+            <div class="flex justify-between items-center p-5 border-b border-slate-100">
+                <span class="font-bold text-xl text-blue-600">ShopSphere</span>
+                <button id="closeDrawerBtn" class="p-2 text-slate-500 hover:text-blue-600 rounded-full">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <nav class="flex bg-white flex-col p-6 space-y-6 text-lg font-medium">
+                <a class="flex items-center gap-3 text-slate-800 hover:text-blue-600 transition-colors py-2 border-b border-slate-50" href="#"><span class="material-symbols-outlined text-blue-500">shopping_bag</span> Shop</a>
+                <a class="flex items-center gap-3 text-slate-800 hover:text-blue-600 transition-colors py-2 border-b border-slate-50" href="#"><span class="material-symbols-outlined text-blue-500">category</span> Categories</a>
+                <a class="flex items-center gap-3 text-slate-800 hover:text-blue-600 transition-colors py-2 border-b border-slate-50" href="#"><span class="material-symbols-outlined text-blue-500">local_offer</span> Deals</a>
+                <a class="flex items-center gap-3 text-slate-800 hover:text-blue-600 transition-colors py-2 border-b border-slate-50" href="#"><span class="material-symbols-outlined text-blue-500">inventory_2</span> New Arrivals</a>
+                <a class="flex items-center gap-3 text-slate-800 hover:text-blue-600 transition-colors py-2 border-b border-slate-50" href="#"><span class="material-symbols-outlined text-blue-500">support_agent</span> Support</a>
+                <div class="pt-4 mt-2 flex flex-col gap-4">
+                   <a href='{% url "accounts:account_cards" %}'> <button class="bg-primary text-on-primary hover:bg-blue-600 w-full py-3 rounded-xl font-semibold flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg"></span> Sign In</button></a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+{% include "nave_link.html" %}

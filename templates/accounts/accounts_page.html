@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+{% block base %}
+
+<main class="min-h-screen flex flex-col items-center justify-center py-2 px-4 mx-auto w-full mt-2 max-w-7xl">
+    <!-- Header Section - Responsive Typography -->
+    <div class="text-center mb-12 w-full max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 mb-4 break-words">
+            Seller Account
+        </h1>
+        <p class="text-lg text-slate-600 px-4">
+            Create your seller account to start reaching millions of customers and growing your business on ShopSphere. Our powerful tools and support will help you succeed in the competitive online marketplace.
+        </p>
+    </div>
+
+    <!-- Account Selection Grid - Fully Responsive & Centered -->
+    <div class="w-full justify-center items-center px-2 mb-8">
+        
+        <!-- Seller Account Card -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-1 sm:p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all duration-300 group h-full max-w-sm mx-auto w-full sm:max-w-lg">
+            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition-transform duration-300">
+                <span class="material-symbols-outlined text-3xl">storefront</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-3">Seller Account</h3>
+            <p class="text-sm text-slate-500 mb-6 flex-grow leading-relaxed">
+                Turn your passion into a business. Powerful tools to reach millions and grow your revenue.
+            </p>
+            <div class="mt-auto w-full">
+               <a href="{% url 'accounts:signup' %}" class="w-full">
+                    <button class="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl active:scale-95 duration-150 ease-in-out transition-all hover:bg-blue-700 shadow-md hover:shadow-lg">
+                        Create Account
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Visual Anchor/Illustration - Beautiful Centered Container -->
+    <div class="w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-lg border border-slate-100 p-2 bg-white">
+        <div class="relative pb-[50%] sm:pb-[45%] lg:pb-[35%] h-0 overflow-hidden rounded-xl bg-slate-100">
+            <img class="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" 
+             src="https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+             alt="Modern online shopping experience"
+             loading="lazy"/>
+        </div>
+    </div>
+</main>
+
+{% endblock base %}

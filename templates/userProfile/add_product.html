@@ -1,0 +1,193 @@
+{% extends 'userProfile/seller_header_footer.html' %}
+
+{% block seller %}
+
+<div class="lg:ml-sidebar-width min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/30">
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-slate-800">
+                Add New Product
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+                Add a new product to your store inventory.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+
+            <form method="POST" enctype="multipart/form-data" class="space-y-6">
+
+                {% csrf_token %}
+
+                {% if messages %}
+        {% for message in messages %}
+
+            <div class="mb-3 p-4 rounded-xl shadow-lg font-medium
+                {% if message.tags == 'success' %}
+                    bg-green-500 text-white
+                {% elif message.tags == 'error' %}
+                    bg-red-500 text-white
+                {% else %}
+                    bg-blue-500 text-white
+                {% endif %}
+            ">
+                {{ message }}
+            </div>
+                    {% endfor %}
+                {% endif %}
+
+                <!-- Product Image -->
+
+                <div>
+
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                        Product Image
+                    </label>
+
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        
+                        class="w-full border border-slate-300 rounded-lg p-3"
+                    >
+
+                </div>
+
+                <!-- Product Name -->
+
+                <div>
+
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                        Product Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+            
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="Enter product name"
+                    >
+
+                </div>
+
+                <!-- Category -->
+
+                <div>
+
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                        Category
+                    </label>
+
+                    <select
+                        name="category"
+                        
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    >
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">
+                                {{ category.name }}
+                            </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <!-- Price + Quantity -->
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                    <div>
+
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">
+                            Price
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="price"
+                            
+                            class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            placeholder="0.00"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">
+                            Stock Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            name="qty"
+                        
+                            class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            placeholder="Available stock"
+                        >
+
+                    </div>
+
+                </div>
+
+                <!-- Description -->
+
+                <div>
+
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                        Product Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        rows="6"
+                        
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="Write product description..."
+                    ></textarea>
+
+                </div>
+
+                <!-- Buttons -->
+
+                <div class="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t">
+
+                    <a href="#"
+                       class="px-6 py-3 border border-slate-300 rounded-lg text-center hover:bg-slate-50">
+
+                        Cancel
+
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    >
+
+                        Add Product
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock seller %}

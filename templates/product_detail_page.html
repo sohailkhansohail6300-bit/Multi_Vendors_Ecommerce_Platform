@@ -1,0 +1,236 @@
+{% extends "index.html" %}
+{% block base %}
+
+
+<main class="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-10 lg:py-12">
+  
+  <!-- Product Section - Responsive Grid -->
+  <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-start">
+    
+    <!-- Left: Product Image Gallery -->
+    <div class="space-y-4 md:space-y-5">
+      <!-- Main Image -->
+      <div class="aspect-square bg-surface-container-lowest rounded-xl overflow-hidden product-shadow border border-outline-variant group">
+        <img alt="Studio Pro Headphones" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="{{ product.image.url}}"/>
+      </div>
+      <!-- Thumbnails Grid - Responsive columns -->
+      <div class="grid grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+        <div class="aspect-square rounded-lg border-2 border-primary overflow-hidden cursor-pointer transition-all hover:opacity-90">
+          <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhlJGQuSLnGruv15Z3JOdiY3X6QWLmBGzeHWNuRXpI4a6zHBHrh7akLOMo6JzuKe8nVoLA-YZbepei8CO0aaYZQceXSJWNZn0ln6SoTb5UYsQxP2ytMd2t0J2lDzNVVLNFYO5Bf_6oJ31hGC0KpIATPu61NpE4K2CWxxIl12lZdvpCX9-djat-CyMP8tWAhqI74kxQkb19pjvO0OVUi9xglEtnDh2HqIkBlziccsUXvufCHzrqzCp-cEdjUhKEuhltKKJSRzKu8Is" alt="Thumbnail 1"/>
+        </div>
+        <div class="aspect-square rounded-lg border border-outline-variant overflow-hidden cursor-pointer hover:border-primary transition-all">
+          <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzoPsiqo9M63gcLY1U-ylbQN9UTa1d5nqdoh1PAaJHrey4u_-i4OYA8lNEyHxHmmySqpTET_9csVWYu3BnhEpyL6FWD2RXlsODJqi_ni6XjyjLxmZ4Pk7KH7Ix52CvoVqWrgGZeeD9L-LnxrNqAUClC6sx1XTq4glUL0v05hjkHSIyzkIyPFoKawblaA8MUMHQNw_3JO1LK03aMU22HN3I8EZ5g1R9EzNMIRw0vFSWF5-zXvHFpryCKAehSWnvc3vz_CpSE4Zw3W4" alt="Thumbnail 2"/>
+        </div>
+        <div class="aspect-square rounded-lg border border-outline-variant overflow-hidden cursor-pointer hover:border-primary transition-all">
+          <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsup94yOPZ-QJKEP6kSmd0KaTvSsLTIHjpCXtChiD6Ng2-Z8rSu-7-SHofQhQRgQjr3OenVmC8XPwcp3ZtWqdDagNw9yHsddVuQkiuqcJEX8aYr7eO1GyBPYgdXELy60C6EVevGvijRDElhATo1ZmuQdllzqq3AVLyKMYYY5CT3NTpXMO_CuCBZAQv9f2b_JVRWNQBYD4xWviyryLzDrwKbJj939EjVNTVR2A2xE3N_fFArzU2Y1h2_TYAyuIOk-kFq_UtxKhXyZI" alt="Thumbnail 3"/>
+        </div>
+        <div class="aspect-square rounded-lg border border-outline-variant overflow-hidden cursor-pointer hover:border-primary transition-all">
+          <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGUk2dpzyXXPPl4V9K15W1_C5_9ni3IaO7xezvkZ7Bev_Xo0D65G7ZAzF2_b_JgmRxg6M02kXxheEbYB9xRI7ncJ2tO1UTePqVnzk7nZ5zNGnLcyegpyyUIi6xBSrBRJOUbdXNCIvoU0P5rXopNSB43cX8x7YQj-3ETaAyuDhvt0_4cQteOmPjl4UEPQy_g8HZ4XL1BDfxpm5PdOtodRflVeK1q1Epyw-SB0GTzxBbdyJ5Eag5XlOEz3QvkVLUjxycx_wcfNcoHAU" alt="Thumbnail 4"/>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right: Product Details -->
+    <div class="flex flex-col gap-4 md:gap-5 lg:gap-6">
+      <div class="flex flex-col gap-2">
+        <span class="font-label-md text-label-md text-primary tracking-wider uppercase">Premium {{ product.category_relation.name }}</span>
+        <h1 class="font-h1 text-h1 text-on-surface">{{ product.Name }}</h1>
+        <div class="flex flex-wrap items-center gap-2 mt-1">
+          <div class="flex text-tertiary gap-0.5">
+            <span class="material-symbols-outlined rating-star" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined rating-star" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined rating-star" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined rating-star" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined rating-star" style="font-variation-settings: 'FILL' 1;">star_half</span>
+          </div>
+          <span class="font-label-md text-label-md text-on-surface-variant">4.9/5 (1,248 Reviews)</span>
+        </div>
+      </div>
+      
+      <div class="text-h2 font-h2 text-on-surface font-bold">${{ product.Price }}</div>
+      
+      <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+      {{ product.Description }}
+      </p>
+      
+      <!-- Color Selection -->
+      <div class="space-y-3">
+        <span class="font-label-md text-label-md text-on-surface">Choose Color</span>
+        <div class="flex gap-3 flex-wrap">
+          <button class="w-10 h-10 rounded-full border-2 border-primary bg-black flex items-center justify-center transition-all hover:scale-105">
+            <div class="w-6 h-6 rounded-full bg-black ring-1 ring-offset-1 ring-primary"></div>
+          </button>
+          <button class="w-10 h-10 rounded-full border-2 border-transparent bg-slate-500 hover:border-outline transition-all hover:scale-105"></button>
+          <button class="w-10 h-10 rounded-full border-2 border-transparent bg-blue-600 hover:border-outline transition-all hover:scale-105"></button>
+        </div>
+      </div>
+
+
+
+
+
+<!-- Action Buttons - Full width on mobile -->
+<div class="flex flex-col sm:flex-row gap-3 pt-4">
+
+  <form method="POST" action="" class="flex flex-col sm:flex-row gap-3 w-full">
+    {% csrf_token %}
+
+    <!-- Quantity Controls -->
+    <div class="flex items-center border border-outline-variant rounded-lg overflow-hidden bg-surface-container-lowest sm:w-auto">
+
+      <button type="button" id="decrementBtn"
+        class="w-10 h-10 flex items-center justify-center">
+        -
+      </button>
+
+      <!-- Hidden/Input Value Sent to Django -->
+      <input
+        type="number"
+        id="quantityInput"
+        name="quantity"
+        value="1"
+        min="1"
+        class="w-12 text-center border-0 outline-none bg-transparent"
+      >
+
+      <button type="button" id="incrementBtn"
+        class="w-10 h-10 flex items-center justify-center">
+        +
+      </button>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit"
+      class="flex-1 py-3 px-4 bg-primary text-on-primary rounded-lg">
+      Add to Cart
+    </button>
+
+  </form>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    let quantity = 1;
+
+    const qtyInput = document.getElementById('quantityInput');
+    const decBtn = document.getElementById('decrementBtn');
+    const incBtn = document.getElementById('incrementBtn');
+
+    function updateQty() {
+        qtyInput.value = quantity;
+        decBtn.disabled = quantity <= 1;
+    }
+
+    decBtn.addEventListener('click', () => {
+        if (quantity > 1) {
+            quantity--;
+            updateQty();
+        }
+    });
+
+    incBtn.addEventListener('click', () => {
+        quantity++;
+        updateQty();
+    });
+
+    updateQty();
+});
+</script>
+      
+      <!-- Shipping & Warranty Info - Responsive grid -->
+      <div class="grid grid-cols-1 xs:grid-cols-2 gap-4 pt-6 border-t border-outline-variant mt-2">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary text-[28px] sm:text-[32px]">local_shipping</span>
+          <div>
+            <p class="font-label-md text-label-md text-on-surface">Free Shipping</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">On orders over $100</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary text-[28px] sm:text-[32px]">verified_user</span>
+          <div>
+            <p class="font-label-md text-label-md text-on-surface">2 Year Warranty</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Full coverage protection</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Customer Reviews Section -->
+  <section class="mt-12 md:mt-16 lg:mt-20 pt-8 md:pt-12 border-t border-outline-variant">
+    <div class="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-12">
+      <!-- Left Stats -->
+      <div class="w-full lg:w-1/3 space-y-5">
+        <h2 class="font-h2 text-h2 text-on-surface">Customer Reviews</h2>
+        <div class="bg-surface-container-low p-5 md:p-6 rounded-xl">
+          <div class="text-[48px] sm:text-[56px] font-extrabold text-on-surface leading-tight">4.9</div>
+          <div class="flex text-tertiary my-2 gap-0.5">
+            <span class="material-symbols-outlined rating-star" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined rating-star" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined rating-star" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined rating-star" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined rating-star" style="font-variation-settings: 'FILL' 1;">star</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Based on 1,248 reviews</p>
+          <div class="mt-5 space-y-2">
+            <div class="flex items-center gap-2"><span class="w-4 text-xs">5</span><div class="flex-1 h-2 bg-outline-variant rounded-full overflow-hidden"><div class="w-[92%] h-full bg-primary rounded-full"></div></div></div>
+            <div class="flex items-center gap-2"><span class="w-4 text-xs">4</span><div class="flex-1 h-2 bg-outline-variant rounded-full overflow-hidden"><div class="w-[6%] h-full bg-primary rounded-full"></div></div></div>
+            <div class="flex items-center gap-2"><span class="w-4 text-xs">3</span><div class="flex-1 h-2 bg-outline-variant rounded-full overflow-hidden"><div class="w-[1%] h-full bg-primary rounded-full"></div></div></div>
+            <div class="flex items-center gap-2"><span class="w-4 text-xs">2</span><div class="flex-1 h-2 bg-outline-variant rounded-full overflow-hidden"><div class="w-[0.5%] h-full bg-primary rounded-full"></div></div></div>
+            <div class="flex items-center gap-2"><span class="w-4 text-xs">1</span><div class="flex-1 h-2 bg-outline-variant rounded-full overflow-hidden"><div class="w-[0.5%] h-full bg-primary rounded-full"></div></div></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Review Cards -->
+      <div class="flex-1 space-y-4 md:space-y-5">
+        
+        {% if comments %}
+        {% for comment in comments %}
+        <div class="p-5 md:p-6 bg-surface rounded-xl product-shadow border border-outline-variant">
+          <div class="flex flex-wrap justify-between items-start gap-2 mb-3">
+            <div><h4 class="font-label-md text-label-md text-on-surface">{{ comment.user_relation.username|default:"Guest"}}</h4><div class="flex text-tertiary mt-1 gap-0.5"><span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL'1">star</span><span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL'1">star</span><span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL'1">star</span><span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL'1">star</span><span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL'1">star</span></div></div>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">{{ comment.created_at }}</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant italic">{{ comment.review_text }}</p>
+        </div>
+        {% endfor %}
+                
+        {% else %}
+        <p class="font-body-md text-body-md text-on-surface-variant">No reviews yet.</p>
+        {% endif %}
+        
+      </div>
+    </div>
+  </section>
+  
+  <!-- Related Products -->
+  <section class="mt-12 md:mt-16 lg:mt-20 pt-8 md:pt-12 border-t border-outline-variant">
+    <h2 class="font-h2 text-h2 text-on-surface mb-6 md:mb-8">Related Products</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+      <!-- Related 1 -->
+       {% if related_products %}
+       {% for i in related_products %}
+       
+       <a href="{% url 'product_detail' id=i.id %}">
+      <div class="group cursor-pointer">
+        <div class="aspect-square rounded-xl bg-surface-container overflow-hidden border border-outline-variant product-shadow transition-all product-card-hover">
+          <img alt="Wireless Earbuds" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="{{ i.image.url }}"/>
+        </div>
+        <div class="mt-2 md:mt-3"><h3 class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">{{ i.Name }}</h3><p class="font-h3 text-h3 text-primary mt-1">{{ i.Price }}</p></div>
+      </div>
+      </a>
+       
+      {% endfor %}
+        {% else %}
+        <p class="font-body-md text-body-md text-on-surface-variant">No related products found.</p>
+      {% endif %}
+   
+    </div>
+  </section>
+</main>
+
+{% endblock base %}

@@ -1,0 +1,109 @@
+{% extends "index.html" %}
+{% block base %}
+
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="p-3 mb-3 rounded-lg text-white
+            {% if message.tags == 'success' %}bg-green-500{% endif %}
+            {% if message.tags == 'error' %}bg-red-500{% endif %}
+            {% if message.tags == 'info' %}bg-blue-500{% endif %}">
+            
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<!-- Main Content: Beautiful, Centered Login Screen -->
+<main class="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 px-4 bg-slate-50 w-full">
+    <div class="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-xl p-6 sm:p-10 transition-all duration-300">
+        
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">Sign In</h1>
+            <p class="text-sm text-slate-500 px-2">Please enter your details to sign in.</p>
+        </div>
+
+        <!-- Login Form -->
+        <form class="space-y-5" method='post'>
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                 {% if message.tags == 'success' %}
+                    <div class="text-green-500">{{ message }}</div>
+                    {% else %}
+                    <div class="text-red-500">{{ message }}</div>
+                    {% endif %}
+
+                {% endfor %}
+                <script>
+                    setTimeout(function() {
+                        var successMessage = document.querySelector('.text-green-500');
+                        if (successMessage) {
+                            successMessage.style.display = 'none';
+                        }
+                    }, 5000); // Hide after 5 seconds
+                </script>
+            {% endif %}
+            <div class="space-y-1.5">
+                <label class="text-sm font-semibold text-slate-700 block" for="email">username</label>
+                <input class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all placeholder:text-slate-400 text-sm sm:text-base" 
+                       id="email" 
+                       name="username" 
+                       placeholder="Enter your username" 
+                       type="text"
+                       required/>
+            </div>
+
+            <div class="space-y-1.5">
+                <label class="text-sm font-semibold text-slate-700 block" for="password">Password</label>
+                <div class="relative">
+                    <input class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all placeholder:text-slate-400 text-sm sm:text-base pr-12" 
+                           id="password" 
+                           name="password" 
+                           placeholder="••••••••" 
+                           type="password"
+                           required/>
+                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 transition-colors" type="button" aria-label="Toggle password visibility">
+                        <span class="material-symbols-outlined text-xl">visibility</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 py-1">
+                <div class="flex items-center gap-2">
+                    <input class="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer" 
+                           id="remember" 
+                           name="remember" 
+                           type="checkbox"/>
+                    <label class="text-sm text-slate-500 cursor-pointer select-none" for="remember">Remember me</label>
+                </div>
+                <a class="text-sm hidden font-semibold text-blue-600 hover:text-blue-700 hover:underline transition-colors" href="#">Forgot Password?</a>
+            </div>
+
+            <button class="w-full py-3 bg-blue-600 text-white font-semibold text-base rounded-xl hover:bg-blue-700 active:scale-[0.99] transition-all shadow-md hover:shadow-lg mt-2" type="submit">
+                Sign In
+            </button>
+        </form>
+
+        <!-- Social Logins -->
+        <div class="mt-8">
+            <div class="relative flex items-center justify-center mb-6">
+                <div class="w-full border-t border-slate-200"></div>
+                <span class="absolute bg-white px-4 text-xs font-medium text-slate-400 uppercase tracking-wider">-</span>
+            </div>
+
+            
+        </div>
+
+        <!-- Footer Link -->
+        <div class="mt-8 pt-6 border-t border-slate-100 text-center">
+            <p class="text-sm text-slate-500">
+                Don't have an account? 
+                <a class="text-blue-600 font-bold hover:text-blue-700 hover:underline ml-1 transition-colors" href="{% url 'accounts:signup' %}">Sign Up</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+{% endblock base %}
